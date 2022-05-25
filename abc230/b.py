@@ -1,7 +1,11 @@
 from collections import deque
 s = input()
 
-if s.find('o') >= 3:
+if len(s) == 1:
+    print("Yes")
+elif s == "xx":
+    print("Yes")
+elif s.find('o') >= 3:
     print("No")
 else:
     S = deque(s)
