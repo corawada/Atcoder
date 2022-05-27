@@ -1,1 +1,3 @@
-xoxxoxxoxxoxxoxxoxxo
+100 3 8
+50 60 50 60
+
