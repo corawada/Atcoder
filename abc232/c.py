@@ -13,7 +13,7 @@ def cong(list_t, list_a):
 
 def dfs(d, rem_t, rem_a):
     # print("----------")
-    # print("call func depth: {}".format(d))
+    print("call func depth: {}".format(d))
     # print("rem_t: {}".format(rem_t))
     # print("rem_a: {}".format(rem_a))
     if d == N:
@@ -52,8 +52,10 @@ for _ in range(M):
     aoki_num[b-1] += 1
 
 
-# print("sort taka_num : {}".format(taka_num))
-# print("sort aoki_num : {}".format(aoki_num))
+print("sort taka_num : {}".format(taka_num))
+print("sort aoki_num : {}".format(aoki_num))
+print(taka)
+print(aoki)
 
 
 # 条件２：次数列が等しいかを判断

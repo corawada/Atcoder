@@ -8,7 +8,6 @@ for idx, a in enumerate(A):
 
 A = A[::-1]
 
-
 for i in range(n-1):
     pre_A = list()
 

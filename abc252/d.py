@@ -1,10 +1,8 @@
 from random import randint
 
-# N = int(input())
-# A = list(map(int, input().split()))
+N = int(input())
+A = list(map(int, input().split()))
 
-N = randint(3, 2*(10**5))
-A = [randint(1, 2*(10**5)) for _ in range(N)]
 
 print(N)
 print(A)
