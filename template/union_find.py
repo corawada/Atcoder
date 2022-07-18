@@ -49,6 +49,7 @@ class UnionFind():
     def group_count(self):
         return len(self.roots())
 
+
     # 全てのgroupのmemberを辞書形式で返す
     def all_group_members(self):
         group_members = defaultdict(list)
@@ -59,25 +60,5 @@ class UnionFind():
     def __str__(self):
         return '\n'.join(f'{r}: {m}' for r, m in self.all_group_members().items())
 
-h, w = map(int, input().split())
-q = int(input())
 
-uf = UnionFind(h*w)
-
-red_point = set()
-for _ in range(q):
-    a, y1, x1, *c = map(int, input().split())
-    if a == 1:
-        red_point.add((y1-1)*w+x1-1)
-        for sy, sx in [[1, 0], [-1, 0], [0, 1], [0, -1]]:
-            tar = (y1+sy-1)*w+x1+sx-1 
-            if tar in red_point:
-                if [y1+sy, x1+sx] == [(tar//w)+1, tar%w+1]:
-                    uf.union((y1-1)*w+x1-1, (y1+sy-1)*w+x1+sx-1)
-    else:
-        y2, x2 = c
-        if (uf.same((y1-1)*w+x1-1, (y2-1)*w+x2-1)) and ((y1-1)*w+x1-1 in red_point):
-            print('Yes')
-        else:
-            print('No')
 
