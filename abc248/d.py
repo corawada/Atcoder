@@ -8,9 +8,7 @@ for idx, a in enumerate(A):
         A_dic[a] = [0, idx]
     else:
         A_dic[a].append(idx)
-
 # print(A_dic)
-
 
 def binary_search(tar_l, tar_r, tar_lis):
     bs = tar_lis.copy()
@@ -46,12 +44,9 @@ def binary_search(tar_l, tar_r, tar_lis):
             l = i 
             break
     rr = l
-
     # print(ll, rr)
 
     return rr - ll
-
-
 
 for _ in range(Q):
     L, R, X = map(int, input().split())
@@ -60,8 +55,6 @@ for _ in range(Q):
         # print('atta')
 
         print(binary_search(L-1, R-1, A_dic[X]))
-
-
     else:
         print(0)
 
