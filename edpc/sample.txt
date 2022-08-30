@@ -1,7 +1,5 @@
-5 15
-6 5
-5 6
-6 4
-6 6
-3 5
+abracadabra
+avadakedavra
 
+abraca
+avadake

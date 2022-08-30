@@ -1,29 +1,29 @@
 n, k = map(int, input().split())
-
-# dp = [[10**10]*(10**5+1) for _ in range(n+1)]
-dp = [dict() for _ in range(n+1)]
-dp[0] = {0:0}
-
-for i in range(1, n+1):
+data = list()
+for _ in range(n):
     w, v = map(int, input().split())
+    data.append([w, v])
 
-    dp[i] = dp[i-1].copy()
-    dp_keys = list(dp[i-1].keys()).copy()
-    for j in dp_keys:
-        if j+v in dp[i].keys():
-            dp[i][j+v] = min(dp[i][j+v], dp[i][j] + w)
-        else:
-            dp[i].update({j+v:dp[i][j] + w})
+# print(data)
 
+dp = [[k+1]*(10**5+1) for _ in range(n+1)]
+dp[0][0] = 0
 
-ans = 0
-for key, value in dp[n].items():
-    if value <= k:
-        ans = max(ans, key)
+touch_set = {0}
+for idx, elem in enumerate(data):
+    nex = set()
+    for j in touch_set:
+        dp[idx+1][j+elem[1]] = min(dp[idx+1][j+elem[1]], dp[idx][j] + elem[0])
+        dp[idx+1][j] = min(dp[idx+1][j] , dp[idx][j])
+        nex.add(j+elem[1])
+    touch_set |= nex
 
-print(ans)
-print(dp[n][ans])
+ans = -1
 
+for idx, weight in enumerate(reversed(dp[n])):
+    if weight <= k:
+        print(10**5 - idx)
+        break
 
 
 
