@@ -1,7 +1,6 @@
 from math import ceil, floor
 from bisect import bisect_left
 from copy import deepcopy
-from itertools import combinations
 
 patern_time_ = [-1, 0, 3, 5, 8, 10, 12, 14, 16, 18]
 patern_time = [i*3600*7 for i in patern_time_]
@@ -9,6 +8,7 @@ patern_time = [i*3600*7 for i in patern_time_]
 x, m, c, e = map(int, input().split())
 for _ in range(m*9):
     input()
+
 ## first step すべてのマシンの時間を測る
 tmp_ans = '9'*(2*x)
 for i in range(m):
@@ -72,14 +72,7 @@ while counter != e:
     for machine in range(m):
         this_delay += delay[machine][target_week]
         if delay[machine][target_week] == 0:
-            # 稼働率から、もしansを減らせるなら減らす
-            kadou_time = ceil(patern_time[ans_list[machine][target_week]] * \
-                    load_rate[machine][target_week])
-            if kadou_time <= patern_time[ans_list[machine][target_week] -1]:
-                ans_list[machine][target_week] -= 1
-                flag = False
-            else:
-                pass
+            pass
         elif ans_list[machine][target_week] == 9:
             pass
         elif delay[machine][target_week] == pre_delay[machine][target_week]:
@@ -125,73 +118,20 @@ while counter != e:
     pre_delay = deepcopy(delay)
     pre_load_rate = deepcopy(load_rate)
 
-# patern_time_ = [-1, 0, 3, 5, 8, 10, 12, 14, 16, 18]
-# 作られたansからCの数に見合ったものを作る
-re_patern_dic = dict()
-for i, value in enumerate(patern_time_):
-    re_patern_dic[value] = i
-
-def create_min_sol(input_lis, C):
-    tar_lis = [patern_time_[i] for i in input_lis]
-    len_a = len(tar_lis)
-    tmp_ans_lis = [[max(tar_lis) for _ in range(len_a)], ]
-    tmp_max_sum = sum(tmp_ans_lis[0])
-
-    for i in range(len_a):
-        tmp_list = [max(tar_lis[:i+1]) for _ in range(i+1)] + \
-                [max(tar_lis[i+1:]) for _ in range(len_a - i -1)]
-        if tmp_max_sum > sum(tmp_list):
-            tmp_max_sum = sum(tmp_list)
-            tmp_ans_lis = [tmp_list, ]
-        elif tmp_max_sum == sum(tmp_list):
-            tmp_ans_lis.append(tmp_list)
-    if C >= 4:
-        for a, b,  in combinations(range(len_a), 2):
-            tmp_list = [max(tar_lis[:a+1]) for _ in range(a+1)] + \
-                    [max(tar_lis[a+1:b+1]) for _ in range(b-a)] + \
-                    [max(tar_lis[b+1:]) for _ in range(len_a - b - 1)]
-            if tmp_max_sum > sum(tmp_list):
-                tmp_max_sum = sum(tmp_list)
-                tmp_ans_lis = [tmp_list, ]
-            elif tmp_max_sum == sum(tmp_list):
-                tmp_ans_lis.append(tmp_list)
-
-    if C >= 6:
-        for a, b, c in combinations(range(len_a), 3):
-            tmp_list = [max(tar_lis[:a+1]) for _ in range(a+1)] + \
-                    [max(tar_lis[a+1:b+1]) for _ in range(b-a)] + \
-                    [max(tar_lis[b+1:c+1]) for _ in range(c-b)] + \
-                    [max(tar_lis[c+1:]) for _ in range(len_a - c - 1)]
-            if tmp_max_sum > sum(tmp_list):
-                tmp_max_sum = sum(tmp_list)
-                tmp_ans_lis = [tmp_list, ]
-            elif tmp_max_sum == sum(tmp_list):
-                tmp_ans_lis.append(tmp_list)
-
-    if C >= 8:
-        for a, b, c, d in combinations(range(len_a), 4):
-            tmp_list = [max(tar_lis[:a+1]) for _ in range(a+1)] + \
-                    [max(tar_lis[a+1:b+1]) for _ in range(b-a)] + \
-                    [max(tar_lis[b+1:c+1]) for _ in range(c-b)] + \
-                    [max(tar_lis[c+1:d+1]) for _ in range(d-c)] + \
-                    [max(tar_lis[d+1:]) for _ in range(len_a - d - 1)]
-            if tmp_max_sum > sum(tmp_list):
-                tmp_max_sum = sum(tmp_list)
-                tmp_ans_lis = [tmp_list, ]
-            elif tmp_max_sum == sum(tmp_list):
-                tmp_ans_lis.append(tmp_list)
-
-    return_lis = [re_patern_dic[i] for i in tmp_ans_lis[0]]
-    return return_lis
-
-
-small_ans_list = deepcopy(ans_list)
-ans_list = []
-for tmp_ans in small_ans_list:
-    return_lis = create_min_sol(tmp_ans, c)
-    ans_list.append(return_lis)
-# print(small_ans_list)
-# print(ans_list)
+# ---------------------------------------------------------
+# remain_time_for_machine = const_sum_time_for_machine.copy()
+# 平均化されたansを算出
+# const_list = []
+# for m_time in const_sum_time_for_machine:
+#     idx = bisect_left(patern_time, ceil(m_time/x))
+#     const_list.append(idx)
+#
+# ans_list = list()
+# for pat in const_list:
+#     tmp_list = [pat, ]
+#     tmp_list.extend([9 for _ in range(x-1)])
+#     ans_list.append(tmp_list)
+# ---------------------------------------------------------
 
 # faze 2
 while counter != e:

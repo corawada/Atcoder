@@ -125,6 +125,7 @@ while counter != e:
     pre_delay = deepcopy(delay)
     pre_load_rate = deepcopy(load_rate)
 
+# pre faze2
 # patern_time_ = [-1, 0, 3, 5, 8, 10, 12, 14, 16, 18]
 # 作られたansからCの数に見合ったものを作る
 re_patern_dic = dict()
@@ -191,15 +192,17 @@ for tmp_ans in small_ans_list:
     return_lis = create_min_sol(tmp_ans, c)
     ans_list.append(return_lis)
 # print(small_ans_list)
-# print(ans_list)
 
+ans_list2 = deepcopy(ans_list)
 # faze 2
 while counter != e:
     counter += 1
-    for week_machine in ans_list:
+
+    for week_machine, holi_machine in zip(ans_list, ans_list2):
         ans_str = ''
-        for tar in week_machine:
-            ans_str += str(tar)*2
+        for tar, tar2 in zip(week_machine, holi_machine):
+            ans_str += str(tar)
+            ans_str += str(tar2)
         print(ans_str)
 
     score, v, d = map(int, input().split())
@@ -215,5 +218,7 @@ while counter != e:
         delay.append(del_li)
         load_rate.append(loa_li)
 
+    pre_delay = deepcopy(delay)
+    pre_load_rate = deepcopy(load_rate)
 # print(ans_list)
 

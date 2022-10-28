@@ -58,13 +58,6 @@ Order.max_chenge_num = c
 ins_lis = [Order(), ]
 ins_lis[-1].update_val()
 
-# at once
-for _ in range(m):
-    print('9'*(2*x))
-
-
-
-
 for _ in range(e):
     # layer : output
     ins_lis[-1].output()
@@ -87,15 +80,6 @@ for _ in range(e):
         ins_lis[-1].rough_chenge_up()
     else:
         ins_lis[-1].rough_chenge_down()
-
-
-    
-
-
-
-
-
-
 
 
 

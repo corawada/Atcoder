@@ -48,3 +48,4 @@
 ./judge "python3 now_ans.py" < input/0047.txt > out0000.txt
 ./judge "python3 now_ans.py" < input/0048.txt > out0000.txt
 ./judge "python3 now_ans.py" < input/0049.txt > out0000.txt
+

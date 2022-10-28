@@ -1,44 +1,28 @@
-from collections import deque
 n, k = map(int, input().split())
 A = list(map(int, input().split()))
 
+left = A[k-1]
+right = A[k]
 
-left = deque(A[:k])
-right = deque(A[k:])
+book = dict()
+re_book = dict()
 
-ll = left.pop()
-left.append(ll)
-rr = right.popleft()
-right.appendleft(rr)
-
-ans = 1
-while left or right:
-    if left:
-        pl = left.pop()
-        if ll > pl:
-            ll = pl
-    if right:
-        pr = right.popleft()
-        if rr < pr:
-            rr = pr
-
-
-
-
-
-
-
-    if right and (ll < right.popleft()):
-        break
-    if left and (rr > left.pop()):
-        break
-
+right_target = -10**10
+left_target = 10**10
+flag = False
+for idx, a in enumerate(A):
+    if idx < k:
+        if a < right:
+            flag = True
+            right_target = max(right_target, idx)
     else:
-        ans += 1
+        if a > left:
+            flag = True
+            left_target = min(left_target, idx)
+            break
+
+if flag:
+    print(min(k-right_target, left_target-k+1))
 else:
-    ans = -1
-
-print(ans)
-
-
+    print(-1)
 
