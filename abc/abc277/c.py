@@ -1,24 +1,25 @@
+from collections import defaultdict
 n = int(input())
 
-ladders = list()
+ladders = defaultdict(set)
 
 for _ in range(n):
     a, b = map(int, input().split())
-    ladders.append([a, b])
+    ladders[a].add(b)
+    ladders[b].add(a)
 
-able = {1}
-ladders = sorted(ladders, reverse=True)
+stack = {1, }
+already = {1, }
 
-# 階段を下に降りることも考慮しなければならない
+while stack:
+    s = stack.pop()
+    for lad in ladders[s]:
+        if lad not in already:
+            stack.add(lad)
+            already.add(lad)
 
-max_b = 1
-while ladders:
-    lad = ladders.pop()
-    if lad[0] in able:
-        able.add(lad[1])
-        max_b = max(max_b, lad[1])
+print(max(already))
 
-print(max_b)
 
 
 
