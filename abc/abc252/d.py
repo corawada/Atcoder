@@ -1,12 +1,29 @@
-nCr = {}
-def cmb(n, r):
-    if r == 0 or r == n: return 1
-    if r == 1: return n
-    if (n,r) in nCr: return nCr[(n,r)]
-    nCr[(n,r)] = cmb(n-1,r) + cmb(n-1,r-1)
-    return nCr[(n,r)]
+n = int(input())
 
-a = cmb(n,r)
+A = sorted(list(map(int, input().split())))
 
+print(A)
+
+multiple = 1
+
+now = A[0]
+count = 1
+
+for a in A[1:]:
+    if a == now:
+        count += 1
+    else:
+        multiple *= count
+        count = 1
+        now = a
+multiple *= count
+
+print(multiple)
+
+lena = len(set(A))
+
+print((lena*(lena-1)*(lena-2)*multiple)//6)
+
+    
 
 
